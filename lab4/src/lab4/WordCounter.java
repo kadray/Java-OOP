@@ -9,45 +9,27 @@ public class WordCounter {
             System.out.println("Brak argumentów programu.");
             return;
         }
-
-        String fileName = args[args.length - 1];
-
+        String fileName= new String();
+        for(String element:args) {
+        	if(element.contains(".")) {
+        	fileName = element;
+        	}
+        }
         boolean countLines = false;
         boolean countWords = false;
         boolean countChars = false;
 
-        // Sprawdź argumenty i ustaw odpowiednie flagi
-        for (int i = 0; i < args.length - 1; i++) {
-            switch (args[i]) {
-                case "-l":
-                    countLines = true;
-                    break;
-                case "-w":
-                    countWords = true;
-                    break;
-                case "-c":
-                    countChars = true;
-                    break;
-                case "-lc", "-cl":
-                    countLines = true;
-                    countChars = true;
-                    break;
-                case "-lw", "-wl":
-                    countLines = true;
-                    countWords = true;
-                    break;
-                case "-wc", "-cw":
-                    countWords = true;
-                    countChars = true;
-                    break;
-                case "-lcw", "-clw", "-wcl", "-wlc":
-                    countLines = true;
-                    countWords = true;
-                    countChars = true;
-                    break;
-                default:
-                    break;
-            }
+        for (int i = 0; i < args.length; i++) {
+        	if (args[i].contains("-")) {
+	        	if (args[i].contains("c")) countChars=true;
+	        	if (args[i].contains("l")) countLines=true;
+	        	if (args[i].contains("w")) countWords=true;
+        	}
+        }
+        if (args.length==1) {
+        	countChars=true;
+        	countLines=true;
+        	countWords=true;
         }
 
         int lines = 0;

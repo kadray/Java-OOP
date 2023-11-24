@@ -16,17 +16,17 @@ public class FileCopy {
             File targetFile = new File(targetFilePath);
 
             if (!sourceFile.exists()) {
-                System.out.println("Plik " + sourceFilePath + " nie istnieje.");
+                System.err.println("Plik " + sourceFilePath + " nie istnieje.");
                 return;
             }
 
             if (sourceFile.isDirectory()) {
-                System.out.println(sourceFilePath + " jest katalogiem.");
+                System.err.println(sourceFilePath + " jest katalogiem.");
                 return;
             }
 
             if (!sourceFile.canRead()) {
-                System.out.println("Brak dostępu do pliku " + sourceFilePath);
+                System.err.println("Brak dostępu do pliku " + sourceFilePath);
                 return;
             }
 
@@ -35,12 +35,12 @@ public class FileCopy {
             }
 
             if (targetFile.exists() && !targetFile.canWrite()) {
-                System.out.println("Brak wymaganych uprawnień do zapisu pliku " + targetFilePath);
+                System.err.println("Brak wymaganych uprawnień do zapisu pliku " + targetFilePath);
                 return;
             }
 
             if (targetFile.exists() && !targetFile.delete()) {
-                System.out.println("Nie można nadpisać pliku " + targetFilePath);
+                System.err.println("Nie można nadpisać pliku " + targetFilePath);
                 return;
             }
 
@@ -56,11 +56,11 @@ public class FileCopy {
 
                 System.out.println("Plik został skopiowany pomyślnie.");
             } catch (IOException e) {
-                System.out.println("Wystąpił błąd podczas kopiowania pliku: " + e.getMessage());
+                System.err.println("Wystąpił błąd podczas kopiowania pliku: " + e.getMessage());
             }
 
         } catch (SecurityException e) {
-            System.out.println("Brak wymaganych uprawnień do katalogu " + targetFilePath);
+            System.err.println("Brak wymaganych uprawnień do katalogu " + targetFilePath);
         }
     }
 }

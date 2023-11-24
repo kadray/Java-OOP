@@ -15,7 +15,6 @@ public class FileAndURLCopy {
         if (args.length == 2) {
             destinationFile = args[1];
         } else {
-            // Pobierz nazwę pliku z adresu URL, jeśli nie jest podana
             try {
                 URL url = new URL(sourceURL);
                 String[] pathSegments = url.getPath().split("/");
@@ -30,7 +29,6 @@ public class FileAndURLCopy {
             URL url = new URL(sourceURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
-
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = connection.getInputStream();
                 FileOutputStream outputStream = new FileOutputStream(destinationFile);
