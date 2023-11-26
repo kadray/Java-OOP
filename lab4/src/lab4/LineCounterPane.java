@@ -4,8 +4,10 @@ public class LineCounterPane {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String fileName = JOptionPane.showInputDialog("Podaj nazwe pliku");
-		LineCounter.readLines(fileName);
+		String[] file_name = new String[1];
+		file_name[0]= JOptionPane.showInputDialog("Podaj nazwe pliku");
+	
+		LineCounter.main(file_name);
 
 	}
 

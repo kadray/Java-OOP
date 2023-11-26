@@ -4,42 +4,24 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 public class LineCounter {
 
-	private static int lineCount = 0;
-	
-	public static void readLines(String fileName) {
-		
-		String fileName_path="src/lab4/"+fileName;
-		try (BufferedReader file = new BufferedReader(new FileReader(fileName_path))) {
-		
-			while((file.readLine()) != null) {
-					lineCount++;
-				}
-			
-			System.out.println("Liczba wierszy w pliku " + fileName + " wynosi: " + lineCount);
-			
-		}
-		catch(FileNotFoundException e) {
-			String[] text = e.getMessage().split(" ");
-			System.out.println("Plik " + text[0] + " nie istnieje.");
-			return;
-		}
-		catch (Exception e){
-			System.out.println("Wystąpił błąd podczas czytania pliku");
-			return;
-		}
-		
+	public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println("Brak argumentów programu.");
+            return;
+        }
+        
+        String file_path=args[0];
+        int lines=0;
+        
+        try(BufferedReader file = new BufferedReader(new FileReader(file_path))){
+        	while(file.readLine() !=null) {
+        		lines++;
+        	}
+        	System.out.println("Liczba wierszy w pliku "+file_path+" wynosi: "+lines);
+        }
+        catch(Exception e) {
+        	String e_msg = e.getMessage();
+        	System.err.println("Wystąpił błąd: "+e_msg);
+        }
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		try {
-			readLines(args[0]);
-		}
-		catch(Exception e) {
-			System.out.println("Brak argumentów programu.");
-			System.exit(0);
-		}
-		
-	}
-
 }

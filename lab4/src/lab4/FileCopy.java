@@ -4,48 +4,48 @@ import java.io.*;
 public class FileCopy {
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Brak argumentów programu.\nUżycie: java FileCopy source_file target");
+            System.out.println("Brak argumentów programu");
             return;
         }
 
-        String sourceFilePath = args[0];
-        String targetFilePath = args[1];
+        String source_path = args[0];
+        String end_path = args[1];
 
         try {
-            File sourceFile = new File(sourceFilePath);
-            File targetFile = new File(targetFilePath);
+            File source_file = new File(source_path);
+            File end_file = new File(end_path);
 
-            if (!sourceFile.exists()) {
-                System.err.println("Plik " + sourceFilePath + " nie istnieje.");
+            if (!source_file.exists()) {
+                System.err.println("Plik " + source_path + " nie istnieje.");
                 return;
             }
 
-            if (sourceFile.isDirectory()) {
-                System.err.println(sourceFilePath + " jest katalogiem.");
+            if (source_file.isDirectory()) {
+                System.err.println(source_path + " jest katalogiem.");
                 return;
             }
 
-            if (!sourceFile.canRead()) {
-                System.err.println("Brak dostępu do pliku " + sourceFilePath);
+            if (!source_file.canRead()) {
+                System.err.println("Brak dostępu do pliku " + source_path);
                 return;
             }
 
-            if (targetFile.isDirectory()) {
-                targetFile = new File(targetFile, sourceFile.getName());
+            if (end_file.isDirectory()) {
+                end_file = new File(end_file, source_file.getName());
             }
 
-            if (targetFile.exists() && !targetFile.canWrite()) {
-                System.err.println("Brak wymaganych uprawnień do zapisu pliku " + targetFilePath);
+            if (end_file.exists() && !end_file.canWrite()) {
+                System.err.println("Brak wymaganych uprawnień do zapisu pliku " + end_path);
                 return;
             }
 
-            if (targetFile.exists() && !targetFile.delete()) {
-                System.err.println("Nie można nadpisać pliku " + targetFilePath);
+            if (end_file.exists() && !end_file.delete()) {
+                System.err.println("Nie można nadpisać pliku " + end_path);
                 return;
             }
 
-            try (InputStream in = new FileInputStream(sourceFile);
-                 OutputStream out = new FileOutputStream(targetFile)) {
+            try (InputStream in = new FileInputStream(source_file);
+                 OutputStream out = new FileOutputStream(end_file)) {
 
                 byte[] buffer = new byte[1024];
                 int length;
@@ -60,7 +60,7 @@ public class FileCopy {
             }
 
         } catch (SecurityException e) {
-            System.err.println("Brak wymaganych uprawnień do katalogu " + targetFilePath);
+            System.err.println("Brak wymaganych uprawnień do katalogu " + end_path);
         }
     }
 }
